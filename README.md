@@ -6,14 +6,14 @@ Rezolvare test - Software Engineer in Test – intern
 Ex1:
     Pentru rezolvarea exercitiului 1 am adaugat in clasa GraphTraversal doua 
     metode pentru parcurgerea in adancime a grafului. Metoda care realizeaza 
-    parcurgerea este depthFirstTraversal, care primeste ca parametrii graful si 
-    nodul sursa. Aceasta metoda se foloseste de metoda recursiva dfsAux care 
+    parcurgerea este depthFirstTraversal(), care primeste ca parametrii graful si 
+    nodul sursa. Aceasta metoda se foloseste de metoda recursiva dfsAux() care 
     este apelata de fiecare data cand este intalnit un nod in graf care nu a 
     fost vizitat. Executia se opreste atunci cand toate nodurile la care s-a 
     ajuns cu parcurgerea sunt vizitate.
 
 Ex2:
-    Pentru rezolvarea exercitiului 2 au fost adaugate urmatoarele clase
+    Pentru rezolvarea exercitiului 2 au fost adaugate urmatoarele clase:
    
     1.Clasa DbManager este folosita pentru a simula o baza de date, gestionand 
     salvarea/incarcarea grafului in/din fisierul my_db.txt. Graful este salvat 
@@ -22,8 +22,8 @@ Ex2:
     care nodul nu are adiacente, acesta va fi singurul element de pe linia 
     respectiva; in situatia in care graful nu are niciun nod, fisierul este gol.
 
-    Metodele folosite pentru aceste operatiuni sunt saveGraphInDB si 
-    loadGraphFromDB.
+    Metodele folosite pentru aceste operatiuni sunt saveGraphInDB() si 
+    loadGraphFromDB().
 
     2.Clasa Rest este folosita pentru a implementa functionalitatile CRUD pe 
     graf: 
@@ -50,10 +50,11 @@ Ex2:
         Functia del apelata cu un parametru va sterge nodul respectiv daca 
         exista in graf, atfel va afisa un mesaj care sa indice acest lucru.
         Functia del apelata cu doi parametrii diferiti va sterge o muchie din 
-        graf, daca aceasta exista, atfel se vor mesaje care sa indice care 
+        graf, daca aceasta exista, atfel se vor afisa mesaje care sa indice care 
         dintre parametrii nu sunt valizi.
         Metodele care realizeaza aceste operatii sunt delete(), delNode(label) 
-        si delEdge(label1, label2).
+        si delEdge(label1, label2). In cazurile in care se aplica modificarile, 
+        se va actualiza si fisierul folosit ca baza de date.
     
     3.Clasa Server este folosita pentru a gestiona request-urile primite sub 
     forma de mesaje pe un socket tcp. In clasa Server se face parsarea comenzii 
@@ -64,7 +65,7 @@ Ex2:
     corespunzator.
 
     4.Clasa Client este folosita pentru a testa functionalitatea aplicatiei. 
-    Clientul se va trimite cereri catre server si va astepta raspuns. Comenzile 
+    Clientul va trimite cereri catre server si va astepta raspuns. Comenzile 
     disponibile cientului sunt:
         - help
         - quit
@@ -97,8 +98,9 @@ Ex3:
     sunt verificate cu ajutorul metodelor auxiliare isCyclic(), isTree(), 
     isLeaf().
         1.Adaugarea de muchii
-         - intai se verifica daca este posibila inserarea muchiei(cel putin un 
-         nod trebuie sa existe in graf)
+         - intai se verifica daca este posibila inserarea muchiei(un nod trebuie 
+         sa existe in graf)
+         - se adauga muchia in arbore
          - pasul urmator este verificarea conditiilor de arbore
          - daca nu sunt indeplinite conditiile de arbore, modificarile efectuate
          sunt anulate si se va afisa un mesaj corespunzator
@@ -127,22 +129,22 @@ Ex4:
     
     Test1: verificarea operatiior pe grafuri din clasa Graph
 
-                        2             4
-                        |             |
-                        1      6------3------5
-                        |      |             |
-                        9------7-------------8
+                        [2]               [4]
+                         |                 |
+                        [1]      [6]------[3]------[5]
+                         |        |                 |
+                        [9]------[7]---------------[8]
     
     Succesiunea de operatii de adaugare noduri/muchii ar trebui sa produca 
-    graful exemplificat mai sus. Pentru validare se va compara output-ul 
+    graful exemplificat mai sus. Pentru validare se va compara cu output-ul 
     functiei de afisare graf din clasa Graph.
     Output: 8[5, 7] 7[9, 6, 8] 6[3, 7] 5[3, 8] 4[3] 3[4, 5, 6] 2[1] 1[2, 9] 9[1, 7]
 
-    Test2: verificarea parcurgerii in adancime(ex2)
+    Test2: verificarea parcurgerii in adancime(ex1)
     Se va folosi graful de la Test1
     Output: 1 2 9 7 6 3 4 5 8
 
-    Test3: verificarea salvarea/incarcarea in/din fisier a grafului
+    Test3: verificare salvarea/incarcarea in/din fisier a grafului
     Se va folosi graful de mai sus. Se va compara graful salvat in fisier cu cel
     reconstruit pe baza citirii fisierului:
     Graf initial: 8[5, 7] 7[9, 6, 8] 6[3, 7] 5[3, 8] 4[3] 3[4, 5, 6] 2[1] 1[2, 9] 9[1, 7]
@@ -160,7 +162,7 @@ Ex4:
     
     In urma operatiilor de mai sus, se asteapta ca arborele sa aiba structura
 
-            3---------1----------2
+            [3]---------[1]----------[2]
 
     Feedback functii de modificare arbore:
         1.Edge inserted successfully
